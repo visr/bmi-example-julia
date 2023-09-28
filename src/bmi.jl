@@ -45,7 +45,7 @@ function BMI.get_value(m::Model, name, dest)
     copyto!(dest, val)
 end
 
-function BMI.get_value(m::Model, name, dest, inds)
+function BMI.get_value_at_indices(m::Model, name, dest, inds)
     val = BMI.get_value_ptr(m, name)
     copyto!(dest, val[inds])
 end
