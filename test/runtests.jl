@@ -52,12 +52,19 @@ using TOML
 
         dest0 = zeros(BMI.get_grid_size(m, 0))
         dest1 = zeros(BMI.get_grid_size(m, 0))
+        dest2 = zeros(2)
 
         z0 = BMI.get_value(m, "plate_surface__temperature", dest0)
         z1 = BMI.get_value(m, "plate_surface__temperature", dest1)
 
+        z2 = BMI.get_value_at_indices(m, "plate_surface__temperature", dest2, [1,2])
+
+        @test dest0 === z0
+        @test dest1 === z1
+        @test dest2 === z2
         @test z0 !== z1
         @test z0 == z1
+        @test z0[[1, 2]] == z2
     end
 
 end  # testset "Heat"
